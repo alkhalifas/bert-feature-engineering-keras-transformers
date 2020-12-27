@@ -1,6 +1,7 @@
 import keras
 from keras_bert import get_base_dict, get_model, compile_model, gen_batch_inputs
 from keras_bert import Tokenizer
+import matplotlib.pyplot as plt
 
 sentence_pairs = [
     [
@@ -64,6 +65,7 @@ history = model.fit_generator(
     ],
 )
 
+
 ## Use the trained Keras model
 inputs, output_layer = get_model(
     token_num=len(token_dict),
@@ -78,4 +80,33 @@ inputs, output_layer = get_model(
     trainable=False, 
     output_layer_num=4, 
 )
+
+print(history.history.keys())
+
+plt.subplot(131)
+plt.plot(history.history['MLM_loss'])
+plt.plot(history.history['val_MLM_loss'])
+plt.title('Masked LM')
+plt.ylabel('Loss')
+plt.xlabel('Epoch')
+plt.legend(['Training', 'Validation'], loc='upper right')
+
+plt.subplot(132)
+plt.plot(history.history['loss'])
+plt.plot(history.history['val_loss'])
+plt.title('Model Loss')
+plt.ylabel('Loss')
+plt.xlabel('Epoch')
+plt.legend(['Training', 'Validation'], loc='upper right')
+
+plt.subplot(133)
+plt.plot(history.history['NSP_loss'])
+plt.plot(history.history['val_NSP_loss'])
+plt.title('Next Sentence Prediction (NSP) Loss')
+plt.ylabel('Loss')
+plt.xlabel('Epoch')
+plt.legend(['Training', 'Validation'], loc='upper right')
+
+plt.savefig('transformers_train_results.png')
+plt.show()
 
