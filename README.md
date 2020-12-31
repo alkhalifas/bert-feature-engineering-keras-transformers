@@ -1,4 +1,3 @@
-# bert-feature-engineering-keras-transformers
 # Demonstration of the Application of the BERT Algorithm for Feature Engineering using Keras:
 
 ### Files:
@@ -13,5 +12,7 @@
 - Build a token dictionary
 - Prepare the keras model
 - plot loss output
+
+### Sample Output:
 
 ![alt text](https://github.com/alkhalifas/bert-feature-engineering-keras-transformers/blob/master/Figure_1.png?raw=true)
